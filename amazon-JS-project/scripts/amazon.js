@@ -22,11 +22,25 @@ const products= [{
     count: 56
   },
   priceCents: 799
+}, {
+  image:'images/products/black-2-slot-toaster.jpg',
+  name:  '2 Slot Toaster - Black',
+  rating: {
+    stars: 5,
+    count: 2197
+  },
+  priceCents: 1899
+
 }];
 
+
+/* To combine html together */
+let productsHTML = ' ';
 /* Here forEach takes each object and save it into parameter called product and runs the function */
+
+
 products.forEach((product) => {
-  const html=`
+  productsHTML = productsHTML + `
         <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -46,7 +60,8 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            $${product.priceCents/100}
+          <!-- toFixed() convert a number into string and inside brackets we have to place how many digits we want -->
+            $${(product.priceCents/100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -75,6 +90,8 @@ products.forEach((product) => {
             Add to Cart
           </button>
         </div>`;
-      console.log(html);
 });
+
+
+document.querySelector('.js-products-grid').innerHTML = productsHTML;
 

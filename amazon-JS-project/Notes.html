@@ -20,6 +20,28 @@
 
     /* We initiated  a variable called productsHTML to combine html together and to put it on web page we are using DOM */
 
+    /* When we click on add to cart button then that product should go to cart page for that we created cart.js in data folder
+    
+    How do we knw which product to add?
+     
+    Data attribte:
+    -is just anoother HTML attribute
+    - allows us to attach any information to an element
+Syntax:
+      In Html after giving class use "data-anyname="${productname}""  
+  Syntax rules for data attribute:
+  - its just an HTML attribute
+  - data attribute should start with data- and name on left and value on right -- see syntax above
+    
+    */
+
+    /* dataset property gives us all the data attributes attached to the button*/
+
+    /* Here we pushed into cart variable in cart.js. Here we sucessfully added products into cart. But if we are clicking on the same add to cart button it showing quantty 1 insted of 2 for example: if we added basketfall into cart it shows quantity to 1 but agan if we added basket ball it again shows quantity 1 but in different array. To overcome this:
+    Steps: 1. Check if the product is already in the cart
+    2. If it is in the cart, increase the qunatity.
+    3. It its not in the cart add it to the cart */
+
 
 
 

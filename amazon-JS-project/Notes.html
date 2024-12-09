@@ -63,6 +63,96 @@ Syntax:
 
     */
 
+  Modules
+
+
+  /*
+    So we linked js to html in amazon.html like this:
+        <script src="data/products.js"></script>
+        <script src="scripts/amazon.js"></script>
+
+    This is combining all the files togeher into 1 big file and run all the code. 
+
+    But the BIG problem is naming conflicts: For example: in cart.js we have a variable called cart. This means we cant use cart variable in any other files. If declared, we will get a error saying 'cart' has already been declared. This is called Naming conflict: two variables with same name.
+
+    How to solve this? Modules.
+
+    cart -> cart.js
+    cart -> amazon.js
+
+    No conflicts
+
+    Ho to create modules? 
+
+    To create a module we just have to delete <script src="data/cart.js"></script>
+
+    If we use a script tag:         <script src="data/cart.js"></script>:
+    1. this run all the code inside cart.js
+    2. this code create a cart variable
+    3. this will cause a naming conflict.
+    
+    So by removing the script tag we no longer running the code i cart.js so we are no longer creating cart variable and no longer creating naming conflict.
+
+    To create a module:
+      1. Create a file and write our code nside that file
+      2. Dont load the file with <script> tag
+      By doing this any variables we create inside the file will be contained inside the file. So wont cause naming conflict. 
+
+      Problem here:After removing <script src="data/cart.js"></script> we dont load cart variable which is inside  <script src="data/cart.js"></script> but we used in amazon.js so we will get an error saying cart doesnt exist. To solve this: continute below
+
+      How to get a variable out of a file? 
+      1. Add type="module" attribute
+      2. Export
+      3. Import
+
+      type="module" is a html attribute which lets a file get variables out of other files. 
+      ex:     <script type="module" src="scripts/amazon.js"></script>
+
+      export: just include export before declaring variable
+      ex: export const cart= []; in cart.js 
+
+      import: import {cart} from '../data/cart.js'
+      here cart is varaible and ../ to exit from scripts folder and then go to the file where cart is located
+
+      1. We have to put all th imports at the top of the file
+      2. We need to use live server inorder to work modules. Modules wont work if we open html file directly(like going to file and open .html file manually)
+
+      Benifits of modules: 
+        1. Avoids naming conflicts
+
+       2. Renaming
+       
+       Now: 
+        import {cart} from '../data/cart.js'
+        const cart = [];
+
+        This again causes naming conflict to overcome this: rename cart 
+
+        import {cart as myCart} from '../data/cart.js'
+        const cart = [];
+
+        Modules has lot of feature to overcome naming conflicts
+
+        3. No need to worry for ordering on files
+        Module are better way to organise our code especially in better projects
+
+        We should atleast link/connect/load one .js file to html using <script></script>. And that one .js file will import other files
+        and this one file is called Entry Point. 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+  */
+
 
 
 

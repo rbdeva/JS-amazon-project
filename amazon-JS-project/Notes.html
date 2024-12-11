@@ -139,6 +139,24 @@ Syntax:
         We should atleast link/connect/load one .js file to html using <script></script>. And that one .js file will import other files
         and this one file is called Entry Point. 
 
+        If theres a lot of code inside a function then split it to a function call it in the function where the code is needed
+        12:466:30 If not understood.
+
+        Best Practice: Group related code together int its own file.
+        Explanation: Earler the function addToCart is in amazon.js but it is handling the cart. So it is better to keep that function in cart.js. And we have to use modules for this to import and export. and updateCartQuantity() function handles updating the webpage rather than managing the cart so better to keep in amazon.js 
+
+        Another syntax of modules:
+
+        import * as cartModule from '../data/cart.js'
+        
+        cartModule.cart
+        cartModule.addToCart('id');
+
+
+        It imports everything from a file and groups it together inside as cartModule object.
+
+         
+        
         
 
 

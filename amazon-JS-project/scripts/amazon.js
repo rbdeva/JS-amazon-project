@@ -1,5 +1,6 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
+
 
 
 /* To combine html together */
@@ -65,40 +66,34 @@ products.forEach((product) => {
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
 
-/* We selected all the add to cart button from the page using querySelectorAll and used forEach to loop to all add to cart buttons*/
-document.querySelectorAll('.js-add-to-cart')
-    .forEach((button) => {
-        button.addEventListener('click', () => {
-          const productId = button.dataset.productId;
-           /*data-product-name converted to productName. kebab case to camel case  */
-          let matchingItem;
-          cart.forEach((item) => {
-            if(productId === item.productId){
-                matchingItem=item;
-            }
+function updateCardQuantity(){
 
-          });
+  
+  //Upating quantity to make cart button interactive on top right
 
-          if(matchingItem){
-            matchingItem.quantity+=1;
-          }
-          else{
-           cart.push({
-            productId: productId,
-            quantity: 1
-           });
-          }
-
-          //Upating quantity to make cart button interactive on top right
-          let cartQuantity = 0; //to count the cart quantity
-          cart.forEach((item) => {
-            cartQuantity += item.quantity;
+  let cartQuantity = 0; //to count the cart quantity
+          cart.forEach((cartItem) => {
+            cartQuantity += cartItem.quantity;
           });
 
 
           document.querySelector('.js-cart-quantity')
             .innerHTML = cartQuantity;
-            
+
+}
+
+
+
+/* We selected all the add to cart button from the page using querySelectorAll and used forEach to loop to all add to cart buttons*/
+document.querySelectorAll('.js-add-to-cart')
+    .forEach((button) => {
+        button.addEventListener('click', () => {
+          const productId = button.dataset.productId;
+           /*data-product-id converted to productId. kebab case to camel case  */
+
+           addToCart(productId);
+           updateCardQuantity()
+                     
         });
     });
 

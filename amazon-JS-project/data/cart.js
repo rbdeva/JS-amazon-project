@@ -1,4 +1,4 @@
-export const cart = [{
+export let cart = [{
 
   productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
   quantity: 2,
@@ -32,5 +32,21 @@ export function addToCart([productId]){
     quantity: 1
    });
   }
+
+}
+//The below function takes the product id and remove it
+/* How?
+1. Create a new array
+2. Loop through the cart
+3. Add each product to the new array , except for this productId
+*/
+export function removeFromCart(productId){
+  const newCart = [];
+  cart.forEach((cartItem) => {
+    if(cartItem.productId !== productId) {
+      newCart.push(cartItem);
+    }
+  });
+cart = newCart;
 
 }

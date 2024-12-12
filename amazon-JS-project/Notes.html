@@ -212,6 +212,36 @@ Syntax:
 
   */
 
+  /*
+        Delete option in checkout page. If we click delete option, product should remove from the cart.
+        How?
+        Step-1. Remove the product from the Cart
+        Step-2. Update the HTML
+        Start: 
+        First lets add event listeners and select all the delete options using document.queryselectorAll and loop through it and for each delete button we should add event listener.
+
+        Again back to step-1:
+          How do we know which product to remove?
+            Just like add to cart we have to attach the product id using data attribute(data-anyname)
+            Like this: 
+            /*
+            <button class="add-to-cart-button button-primary js-add-to-cart"
+            data-product-id="${product.id}">
+             Add to Cart
+             */
+
+          How do we remove the productId from the cart?
+            To do this we have a create a functon inside cart.js because cart.js has the code related to cart page which help us to organize our code
+
+        
+
+
+
+
+
+
+  */
+
 
 
 

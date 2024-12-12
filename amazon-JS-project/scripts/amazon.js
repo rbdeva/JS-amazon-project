@@ -1,5 +1,6 @@
 import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
+import { formatCurrency } from './utils/money.js';
 
 
 
@@ -30,7 +31,7 @@ products.forEach((product) => {
 
           <div class="product-price">
           <!-- toFixed() convert a number into string and inside brackets we have to place how many digits we want -->
-            $${(product.priceCents/100).toFixed(2)}
+            $${formatCurrency(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">

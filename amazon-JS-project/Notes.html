@@ -181,6 +181,38 @@ Syntax:
   */
 
 
+  
+
+  /* 
+  import {formatCurrency} from './utils/money.js';
+        Here, single dot means, current folder
+  
+  */
+
+  /* 
+          Problem: After generating HTML in JS, we faced a problem: If we selects delevert date for prodct 1 then automatically it was unchecking the delivery date for prouct 2. Here, it only ables to select delivery date for only one product.
+
+          Solution: Radio selector: <input type="radio" name="name1">
+            If a set of radio selectors have the same name then we can only select only one of them.
+            same name = we can only select one of them.
+            Example: In the choose a delivery option: we have dayes and days, uesday, wednesday and monday. If these theree has same name, then we can only choose one option.
+
+            // For tues, wed ad monday for product 1
+            <input type="radio" name = "name1">
+            <input type="radio" name = "name1">
+            <input type="radio" name = "name1">
+
+            So if product 1 has differnt radio selector name  and product2 has different radio selector name then it will work
+
+            // For tues, wed ad monday for product 2
+            <input type="radio" name = "name2">
+            <input type="radio" name = "name2">
+            <input type="radio" name = "name2">
+            So the soltin is giving product id. because of its uniqueness
+
+  */
+
+
 
 
   </script>

@@ -300,6 +300,96 @@ Syntax:
         and dayjs() has one more method: dayjs().format(), which helps to print in easy to read format. 
         
         deliveryDate.format('dddd, MMMM D');
+
+
+        Due to naming conflicts it better not uto load external libraries using script tag. So better to use JS Modules.
+
+        To use external libraries and JS Modules together, we should use ESM  version
+        ESM Version: EcmaScript Module (EcmaScript = JavaScript)
+        A version that works with JS Modules.
+
+        Default export: 
+          Another way of exporting
+          We can use it when we only want to export 1 thing
+          
+        For some external libraries we still have to use script tag.
+
+
+
+        Now, if choose delivery option for 3 days then 4.99 dollars dhould be added tpo cart, and viceversa. For that, 
+        1. Delivery time
+        2. Price
+
+        Our cart: cart = [{
+          productId: 'uywjdgycwejsf';
+          quantity: 2,
+        }, {
+            productId: 'ewfsvcyeukfsds';
+            quantity: 1
+        }]
+
+        We can add delivertTime and deliveryPrice to the cart like this: 
+        Our cart: cart = [{
+          productId: 'uywjdgycwejsf';
+          quantity: 2,
+          deliveryTime: '3 days',
+          deliveryPrice: 499
+        
+        }, {
+            productId: 'ewfsvcyeukfsds';
+            quantity: 1,
+            deliveryTime: '3 days',
+            deliveryPrice: 499
+        }]
+        But this will make duplicate 
+
+        So we are saving delivery Options separtely
+        deliveryOptions = [{
+          id: 1,
+          deliveryTime: '7 days',
+          deliveryPrice: 0
+        }, {
+          id: 2,
+          deliveryTime: '3 days',
+          deliveryPrice: 499
+        }]
+
+        and just save id in cart:
+
+        cart = [{
+          productId: 'uywjdgycwejsf';
+          quantity: 2,
+          deliveryOptionId: '2'
+        
+        }, {
+            productId: 'ewfsvcyeukfsds';
+            quantity: 1,
+            deliveryOptionId: '2'
+        }]
+
+        This technique is called Normalizing the data.
+
+        Firt lets create the data for delivery options.
+
+        For new poducts(after add to cart) we are giving default deivery Id as 1(free shipping).
+
+
+        We might have a cart saved in local storage so to add delievry option id to local storage as well. So we have to delete the cart in local storage and we can use the default values
+        in console type: localStorage.removeItem('cart').
+
+       localStorage.clear() typethis inthe chrome console if facing any errors even code is correct it might be due to bad storage in local storage.
+
+
+
+       iF price is 0 then display free
+       If price is not 0 then display price
+
+        
+
+
+
+
+
   */
 
 

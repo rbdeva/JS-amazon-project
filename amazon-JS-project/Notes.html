@@ -387,7 +387,25 @@ Syntax:
 */
 
 /*
-A function can call/re run itself and it is called recusrion
+A function can call/re run itself and it is called recusrion.
+
+
+To update the data/page we used a technique:
+  1. Update the data
+  2. Regenerate all the HTML
+  and this technique is called MVC.
+Model View Control: POPULAR TECHNIQUE IN SOTWARE ENGINEERING
+MVC split our code into 3 parts
+        1. Model = saves and manages the data(all the code in data folder is model becuase it saves and manages the data)
+        2. View = take sthe data and displays on the page(checkout.js is view because it takes the data and generates the HTML)
+        3. Controller = runs some code when we interacted with the page(bottom of checkout.js(eventListeners))4
+
+      They thre interact with each othr in a loop.
+
+      First, we use model to generate view, then we interactive with view to run controller then the controller will update the model and finally we use the updated model to regenrate the view. wE USED THIS IN our project
+      MVC=Makes sure the page always matches the data
+      MVC is a design pattern.
+      Many JS frameworks  are on MVC
 
 */
 

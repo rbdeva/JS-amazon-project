@@ -460,7 +460,48 @@ Errors:
 
 Testing Frameworks: External library that helps us write tests earlier
 Jasmine Testing Framework: Almost testing frameworks are similar.
-Other testing frameworks: Jest(For ReactJS), MochaJS
+Other testing frameworks: Jest(For ReactJS), MochaJS.
+
+
+In Jasmine, Spec = test. So SpecRunner(now tests.html) means TestRunner.
+
+In tests.html:
+          <!-- include source files here... -->
+  <script src="src/Player.js"></script>
+  <script src="src/Song.js"></script>
+
+  These are files which we are gng to test. EX: Money.js
+
+  <!-- include spec files here... -->
+  <script src="spec/SpecHelper.js"></script>
+  <script src="spec/PlayerSpec.js"></script>
+  These are the testing files ex: tests.html in utils folder inside tests folder.
+
+  As discussed earlier, testing frameworkd do:
+        1. create test suite
+        2. create tests
+        3. compare values and display results
+  Testing framewroks: an external library that helps us write tests easier
+
+  In Jasmine to write a test suite, we have to use describe() function.
+  Has 2 parameters:
+  1. name it in a string, 
+  2. function to add tests.
+
+  After this we have to create a tests:
+   To do that we should use it(description, testFunction, timeout);
+   description = name in string.
+
+   In jasmine, instead of creating if statements and displaying results ouself, jasmine provides another function to do all fof it and that function is called expect();
+   expect() lets us compare our value to another value.
+   ex: expect(formatCurrency(2095))
+   To compare expect(formatCurrency(2095)), expect gives us anbject and this object have many methods to compare. One methos is .toEqual.
+   expect(formatCurrency(2095)).toEqual('20.95');
+
+   Jasmine is just like english.
+   We can also use describe() inside a describe()
+
+
 
 */
 

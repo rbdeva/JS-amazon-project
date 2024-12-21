@@ -499,7 +499,61 @@ In tests.html:
    expect(formatCurrency(2095)).toEqual('20.95');
 
    Jasmine is just like english.
-   We can also use describe() inside a describe()
+   We can also use describe() inside a describe().
+
+   Test a differet functions using jasmine:
+   Features of testing framework:
+
+   Best Practice:
+        Test each condition of an if-statement an it is called test coverage.
+        Test coverage = how much of the code is being tested.
+        Tryt to maximize test coverage.
+        Example: in cart.js, in addToCart function we have to test if statement first(whether the product is already in the cart) and then else statement(whether the product is not in the cart).
+
+        Here, we cant use expect() because we cant compare here because addToCart wont return anything to compare.
+
+        Here, cart takes input from local Sroage which means if cart is empty, it has 2 defaut values.
+
+        Flaky test =  test that sometimes passes and sometimes fails.
+        
+        Mocks= lets us replace a method with a fake version anything we want.
+
+        We can create a mock using spyOn.
+        Takes two parameters: 1. object we want to mock 
+                              2. a method in string we want t mock
+                              
+        So it will replace localStorage.getItem with a fake version. We can make this fake version to anyting we want.
+         To do that, spyOn gives us an object and this object has an property to Use
+         spyOn(localStorage, 'getItem').and.callFake();
+         here and is also a object and callFake is a method.
+         Here we have to give .cakeFake a function and this function overrides original getItem with whatever inside the function. So we are making getItem empty array.
+         
+         Local strorage only supports string so we need to return in string.
+         
+         Here we are still failing i tests
+         Reasons: here, we already load cart from localStrage in the first line of the code using import, and then we are mocking. order of the code matters.
+
+         One way to solve the problem, once we mock the localStorage, we should reload the cart. So re run the code.
+         How?
+         use a function loadFromStorage() and psh the previous code manually.
+
+         in cart.js we ar saving the cart into localStorage using localStorage.setItem. We dont want our test code to modify localStorage and effecting our real code
+         So lets mock setItem as well. 16:40:00.
+
+
+         Here order of the code matters, first we have to  mock localStorage.setItem first and then we call add to cart so no setItem replaces with a fake version and this will no longer saved to local Storage.
+
+
+         spyOn() has one more usefull feature. It records every time when a method is used.
+
+         For example: what if we want to make sure that addToCart saved the cart into localStorage in the end.
+         In out tests setItem is mocked so we cant really checked whats inside localStrogae. Instead we can just check addToCart call setItem at some point.
+        To do that: 1st parameter is method we mocked
+         expect(localStorage.setItem).toHaveBeenCalledTimes;
+         This tells how many times localStorage.setItem called
+
+
+        
 
 
 

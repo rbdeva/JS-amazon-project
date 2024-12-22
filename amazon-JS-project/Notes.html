@@ -552,7 +552,39 @@ In tests.html:
          expect(localStorage.setItem).toHaveBeenCalledTimes;
          This tells how many times localStorage.setItem called
 
-         A mock only lasts for one test
+         A mock only lasts for one test.
+
+
+         Creating more complicated testing:
+
+         Unit Testing: Testing one piece of the code.
+
+        Testing whole page or some part of the page is called Integration Test.
+
+        Integration Test =  test many unites/pieces of code working together.
+
+        In integration test, we have 2 things to test:
+          1. How the page looks
+          2. How the page behaves
+
+        So, In orderSummaryTesr.js we are mocking localStorage age because by default orderSummary.js load cart from localStorage
+
+        Lets see if we click on delete button the product is gettting delete or not.
+
+        Hooks: Lets us run some code for each Test
+
+        Example: Wecan share a same piece of code for tests using hooks.
+
+        beforeEach() - Before each of our tests beforeEach() functions runs.
+        Helps to duplication.
+
+        Hooks in Jasmine:
+          beforeEach() - runs code before each Test
+          afterEach() -  runs code after each Test - usefull for cleanup code - just like removing html after tests in our orderSummaryTest.js tests
+          beforeAll() - runs code before all tests
+          afterAll() -  runs code after all tests
+
+
 
 
         

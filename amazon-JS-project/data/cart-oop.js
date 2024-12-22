@@ -1,4 +1,4 @@
-function Cart(){
+function Cart(localStorageKey){
   const cart = {
     //property: value
     //cart: undefined;
@@ -6,7 +6,7 @@ function Cart(){
     
     //loadFromStorage: function(){ - shotcut for the beolowline code
     loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem('cart-oop'));
+    this.cartItems = JSON.parse(localStorage.getItem(localStorageKey));
     
     if (!this.cartItems) {
       this.cartItems = [{
@@ -24,7 +24,7 @@ function Cart(){
       //function saveToStorage() {
       //saveToStorage: function(){ - shotcut for the beolowline code
       saveToStorage(){
-      localStorage.setItem('cart-oop', JSON.stringify(this.cartItems));
+      localStorage.setItem(localStorageKey, JSON.stringify(this.cartItems));
     },
 
     //export function addToCart(productId){
@@ -87,8 +87,8 @@ function Cart(){
   return cart;
 }
 
-const cart = Cart();
-const businessCart = Cart();
+const cart = Cart('cart-oop');
+const businessCart = Cart('cart-business');
 
 
 cart.loadFromStorage();

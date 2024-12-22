@@ -379,6 +379,8 @@ Syntax:
 
        localStorage.clear() typethis inthe chrome console if facing any errors even code is correct it might be due to bad storage in local storage.
 
+       If we got errors likes object object, then check your code, always JSON.stringify() before saving to localStorage
+
 
 
        iF price is 0 then display free
@@ -585,9 +587,60 @@ In tests.html:
           afterAll() -  runs code after all tests
 
 
+          In this lesson:
+            1. Manual and automated tests
+            2. Test cases and test suites
+            3. Testing frameworks =  helps us writetests easier
+            4. Mock and spy on methods
+            5. Test web pages using integration tests
+            6. Hooks
 
 
-        
+*/
+
+/*
+
+        Object Oriented Programming - Oop
+          
+          - Another style of Programming/Another way we write our code
+          - Organizing our code into objects
+
+
+          Procedural Programming 
+          Procedure: A set of step ny step instructions
+                    This is basically a function
+                  
+                      In procudeure programming, we organize our code into separate function
+                      O the other hand, in oop, we organize our code into objects
+
+
+                      export let cart; is same as export let cart=undefined;
+
+
+                      Inside an object we cant use the words export and let.
+                      We cant use the export inside the object so we have to convert as property and value.
+                      Always use regular function inside not arrow functions.
+                      
+                      Function inside an object = method
+
+                      Shortcut for methods;
+                      Shorthand method syntax:  Instead of writng loadFromStorage: function() we can just write loadFromStorage().
+                      loadFromStorage: function() same as  loadFromStorage().
+
+                      Here, cart.cartItems: cart is a object. If we change the object name we will get some errors so we will use this. 
+                      Example: this.cartItems.
+
+
+                  Why OOP?
+                    Tries to represent the real world
+                    Easy to create multiple objects - Ex: We simplly copied cart object and make a new business cart(check cart-oop.js).
+
+          We can use a function to create multiple objects:
+          In OOP use PascalCase for things that generate objects
+          Instead of copy paste to create objects, we can use functions and call it whenver we need. 
+
+
+
 
 
 

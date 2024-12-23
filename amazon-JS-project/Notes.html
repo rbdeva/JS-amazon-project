@@ -711,7 +711,81 @@ In tests.html:
                   Polymorphism:
 
                     Use a method without knowng the class. Instead of using if else or ternanry polymorphism is helpfull : 19:13:35 for more info 
-          
+
+
+              Built-in Classes:
+                Classes that are provided by the language 
+                  Ex: new Date();
+
+                  const date = new Date();
+                  console.log(date); //Mon Dec 23 2024 09:42:29 GMT+0530 (India Standard Time)
+                  console.log(date.toLocaleTimeString()); /9:42:29 AM
+
+                  We used DayJS earlier and DayJS uses this Date class behind the scenes.
+                  DayJS gives us a lot of extra features too. So we used DayJS instead of Date directly.
+
+                  More details about this:  
+                    "this" lets an object access its own properties
+                      console.log(this);
+                        Here, its running outside the object and there's no object for "this" to point out to so this = undefined
+
+                        Originally in JS, this = window. But its making confuson. SO, when h=they released JS modules, Inside a module, this = undefined
+
+                      We can also use this when creating objects
+                        const object2 = {
+                          a: 2,
+                          b: this.a //At this point of code, object 2has not been created yet here, this = undefined.
+                        };
+
+                    We can also use "this" inside a function.
+
+                    function logThis(){
+                      console.log(this); //Not inside of any object, so theres nothing for "this" to point to. this = undefined
+                    }
+
+                    function logThis(){
+                      console.log(this); 
+                    }
+                    logThis(); //undefined
+
+                  
+                    Inside a function, we can change "this" to whatever we want.
+
+                    To do that, functions have special method called .call()
+
+                    function logThis(){
+                      console.log(this); 
+                    }
+                    logThis();
+                    logThis.call();// Does the same thing as above line except  we  set the value "this" whatever we want
+                    
+                    Ex: 
+                    logThis.call('hello'); //hello
+
+
+                    Ex: 
+                    function logThis(param1, param2) {
+                      console.log(this);
+                    }
+                    logThis('hello', param1, param2);// The firts parameter is the value of the "this".
+
+                  
+                  
+                Arrow functions do not change the value of "this"
+                this
+                const object3 = {
+                  method: () => {
+                    console.log(this);
+                  }
+                };
+                //Here "this" will have the same value as outside the arrow function. So here, inside and outside the value of "this" is undefined
+                
+                object3.method();//undefined
+
+
+                More info: 19:27:00
+
+                    
           
           */
 

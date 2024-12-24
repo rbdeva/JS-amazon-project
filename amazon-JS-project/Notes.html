@@ -783,11 +783,164 @@ In tests.html:
                 object3.method();//undefined
 
 
-                More info: 19:27:00
+                More info: 19:27:00.
+
+
+                Which style of programming should we use?
+                  Object-oriented programming or Procedural Programming?
+                    Its up to you. In JS Procudural Programming is easy to use. But OOP is most popular/useful in other languages.
+
+                  
+
+
+                    In this lesson:
+                      1. Oop
+                      2. Uses a funcyion to generate objects
+                      3. Classes
+                      4. Private prperties and methods
+                      5. Inheritance
+                      6. Method overriding and Polymorphishm
+                      7. More details about "this"
 
                     
           
           */
+
+
+
+
+                      Backend, Callbacks, Async Await
+
+                      Our computer - Internet - Backend(Amazon)
+                      Here, our computer and amazon are connected to the internet then can actually sends messages to each other using a fetaure called HTTP  - Hyper Text Transfer Protocol.
+                      A web browser sends an HTTP request to a server, which then sends an HTTP response back to the browser.
+
+
+                    In an HTTP message, we can actually attachs information like an amaozn order, now amazon will recevives this HTTP message and now amazon will know what we ordered.
+
+
+                    Lets send first HTTP message using JS:
+                      XMLHttpRequest is a built-in class built by JS
+
+                      new XMLHttpRequest(); //creates a new HTTP message to sen to the backend  
+                        Message = Reuqest,.
+                          nNow lets sets up this reqest.
+                            To set up we use .open(); and it has 2 parameters, 
+                              1. type of http message to send.
+                                types of requests/message: GET, POST, PUT, Delete
+                              GET = get some information from the backend
+
+                              2. Where to send this http message  
+                                URL: Uniform Resource locaator
+                                  Like an adress, but for the internet  
+                                  Helps us locate another computer on the internet.
+
+                                  https://amazon.com
+                                  here, s in https is secured version of http
+
+
+                                  Terminology: 
+                                    When we sent a messag to the backend, this message is called 'Request'
+
+                                    When backend receivs a request then  it send http message and this is called "Response".
+
+                                    Each response we make we will get a request. This s called Request-Resonse Cycle = 1 request, 1 response.
+
+
+                                  After sending the request whe get the response: xhr.response();
+
+                                  It takes time to get the response after sending the request.
+
+                                  xhr.response = undefined at first.
+
+                                  here xhr.send is asynchronous code.
+
+                                  Asynchronouse code:  It wont wait for xhr.send() to finish . It just sents the request and immedhiately
+                                  goes to the next line. The response may come back later. So in order to wait for the response here(xhr.send()),
+                                  we should use xhr.addEventListener(); after creating XMLHttpRequest object
+                                  This method listens or wait for an event. Takes  two parameters 
+                                    1. Event we want to listen for or wait for. In our case we are waiting for xhr.response() to come back.
+                                      load - load means the response has loaded
+                                    2. The function we want to run
+
+                                           const xhr = new XMLHttpRequest();
+
+                                           xhr.addEventListener('load', () => {
+                                             xhr.response
+                                           });
+                                           
+                                           xhr.open('GET', 'https://supersimplebackend.dev');
+                                           xhr.send();
+                                           //xhr.response;
+
+                                  now xhr.response wont be undefined as it contaiines the response. 
+
+
+                                  Why we kept eventlistener at top?
+                                           Becuase, we need to setup event listener and then trigger the event(xhr.send()) or send the request
+
+                                           This is just like setting up an evet listener for clicking an button, WE need to setup eventListener first and thenwe click the button after.
+
+
+                                  We can send differnet requests or differnet messages to the backend using url paths
+
+                                  Url Paths:
+                                           The url paths are the parths that comes after the domain name
+                                            Ex: https://supersimplebackend.dev/hello  
+                                              here /hello is url path
+
+                                              https://supersimplebackend.dev/products/first
+                                              here /products/first is url path
+
+                                              https://supersimplebackend.dev  
+                                              here / is url path.
+
+                                          We can send a requests to each url paths and each url paths gives different response.
+
+                                A backend only supprts a certain set of url paths.
+                                  If we send a request to a URL path that is not supprted, the backend will response with an error.
+
+
+                                Whenevr we get a response from backend, backend will aso send status code.
+                                
+                                      Status Code:
+                                           Starts with 4 or 5 (400, 404, 500) = failed 
+                                           Starting with 4 means its our problem, we sent a reuest to the url path that is not supppported
+                                           Starting with 5, means backends problem: Exc: the backend crashed.
+
+                                           Starting with 2(200, 201, 204) = succeeded
+
+
+                                How do we know which url path is supported:
+                                           No specific way but websites gives documentation for what url paths gives what response
+
+
+                                      The list of all url path supported are called Backend API
+                                           API = Application Programming Interface
+                                            Interface = How we interact with something.
+                                            \
+
+                                    Backend responds with differnet type of data
+                                           Ex: Text, image, HTML, JSON
+
+                                    We can find the what type of data we got in Network section -> Headers -> Content-type.
+
+                                  Anoter type of data backend can respond is JSON.
+
+                                If we get JSON from the backend, then we can use JSON.parse(), to convert into JS
+
+
+                            This aloows us to send JS objects across the internet, to the backend.
+
+
+                                  Another type of data backend can respond is HTML data
+
+                                  Another type of data backend can respond is image
+                                           
+                                    
+                              When we type a URL in the browser, it actually sends a GET request.
+
+                                           So, using the browser = making a GET request
 
 
 

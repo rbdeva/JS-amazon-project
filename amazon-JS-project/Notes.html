@@ -972,6 +972,38 @@ In tests.html:
                                     We send a request and then used callback to wait for a response and then run the rest of r code
 
 
+                                    New Hook: beforeAll(); It will run a function before runinng all the tests
+
+                                    beforeAll(() => {
+                                      loadProducts();
+                                    });
+
+                                    Here loacProducts() is asynchronous, which means it sents request to the backend but wont wait till the response get back. So it just sents a request and continue the rest of code to execute. So response is not come back at. So products is still an empty array. 
+                                       To fix this issue, we need loadProduct() to wait and then continue rest of the code. 
+                                        Jasmine has a feature for waiting for some code to finish called .done();
+
+                                        beforeAll((done) => {
+                                          loadProducts( () => {
+                                            done();
+                                          });
+                                        });
+
+                                        Here products load first then we call done then it goes to the next step.
+
+
+                                    We can also use done in beforeEach and it 
+
+
+                                    beforeAll((done) => {
+                                      loadProducts( () => {
+                                        done();
+                                      });
+                                    });
+
+                                    import {loadProducts} from '../../data/proucts.js';
+
+
+
 
 
 

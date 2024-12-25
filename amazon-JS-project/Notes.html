@@ -1618,7 +1618,65 @@ In tests.html:
                             reject creats an error in the future.
 
                             In promise -> asynchronous and/or in the future use  reject
-                              Synchronpoous or right away use throw
+                              Synchronpoous or right away use throw.
+
+
+
+          Back to Project:
+                            When we click the Place your order button,
+                              make a request to ther backend to create the order.
+
+                              document.querySelector('.js-place-order')
+                              .addEventListener('click', () => {
+                                fetch('https://supersimplebackend.dev/orders')
+                              });
+                     We need to send some data to the backend(We need to send our cart);
+
+                     To send data in a requestr, we need to use a different type of request.
+                              4 Types fo Requests:
+                                GET = Get something from the backend
+                                POST = Create something
+                                PUT = Update something
+                                DELETE = Delete Something.
+                                
+                              Get requests dont really let u send data to the backend. So  we are using POST, which lets us send some data to the backend.
+
+                              headers gives the backend mpore information aboput our request
+
+                              document.querySelector('.js-place-order')
+                              .addEventListener('click', () => {
+                                fetch('https://supersimplebackend.dev/orders', {
+                                  method: 'POST',
+                                  headers: {
+                                    'Content-Type': 'application/json'
+                                  }
+                                })
+                              });
+
+                              This tells backend, what type of data we are sending to the backend, which is JSON in this case.
+                              body have the information on what we are sending. and 
+
+                              we cant send an objectr directly. we need to convert it into a JSON string
+
+                                                            
+                                  document.querySelector('.js-place-order')
+                                  .addEventListener('click', () => {
+                                    fetch('https://supersimplebackend.dev/orders', {
+                                      method: 'POST',
+                                      headers: {
+                                        'Content-Type': 'application/json'
+                                      },
+                                      body: JSON.stringify({
+                                        cart: cart
+                                      })
+                                    })
+                                  });
+
+                                          After sending this request, we need to wait for the response  to comeback, 
+                                          
+                                To remove orders from localStorage use:
+                                  localStorage.removeItem('order')
+                            
                             
 
 

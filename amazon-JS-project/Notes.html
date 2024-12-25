@@ -1422,23 +1422,204 @@ In tests.html:
 
 
                             So when using asynchronous code, best practice is to use async await, over promises and callbacks, because they are much cleaner
-                          
-
-
-                                                  
-                                      
-
-
-
-
-
-
-
-
-
-
+                                                                   
                               */
 
+/*
+                Error Handling
+                        When we are sending HTTP requests, we could get unexpected errors
+                         Like, internet might stop working
+
+
+                      In callbacks, we set up a separate callbacks just for Errors
+
+                                                
+                          xhr.addEventListener('error', () => {
+                            console.log("Unexpected error. Please try again later")
+                          });
+
+                          And thgis is called Error Handling
+
+                          Can have parameter called erro, contains information about error
+
+
+                          xhr.addEventListener('error', () => {
+                            console.log("Unexpected error. Please try again later")
+                          });
+
+
+                          In callbacks, we set up a separate callbacks just for Errors
+
+
+                  Handle errors in promises:
+                          
+                  To handle erros in promises, promises gives two methods: 
+                          .then and .catch
+                            We have to give .catch() a function. So if it got an error then it goes to .catch()
+
+                            export let products = [];
+
+                                export function loadProductsFetch(){
+                                  const promise = fetch(
+                                    'https://error.supersimplebackend.dev/products'
+                                  ).then((response) => {
+                                  return response.json();
+                                  }).then((productsData) => {
+                                    products = productsData.map((productDetails) => {
+                                      if(productDetails.type === 'clothing'){
+                                        return new Clothing(productDetails); //Now our array has mix of clothing and products
+                                      }
+                                    
+                                      return new Product(productDetails);
+                                    
+                                    });
+                                    console.log('load products')
+                                  }).catch(() => {
+                                    console.log("Unexpected error. Please try again later");
+                                  });
+                                  return promise;
+
+                                loadProductsFetch();
+                              }
+
+                              Just like callback, .catch() has a paremeter called eror. which contains information about the error.
+
+
+                Handle errors in async await: 
+                        we can use try catch
+
+                              
+                        We can put the code, which can cause an error inside try, here, we are making the request to the backend in loadProductsFetch () and loadCart().
+                        async function loadPage(){
+                          //console.log('load page');
+                        
+                          try{
+                          await loadProductsFetch();
+                        
+                          await new Promise((resolve) => {
+                            loadCart(() => {
+                              resolve();
+                            });
+                          });
+                          }
+                          
+                        
+                          renderOrderSummary();
+                          renderPaymentSummary();
+                        
+                        }
+                        loadPage();
+
+
+
+                        If any of the code inside try gets an error then we can catch it using the code catch and catch has one parameter called error and it containes infornmation about error if need , works similarly to .catch()
+
+
+                        async function loadPage(){
+                          //console.log('load page');
+                        
+                          try{
+                          await loadProductsFetch();
+                        
+                          await new Promise((resolve) => {
+                            loadCart(() => {
+                              resolve();
+                            });
+                          });
+                        
+                          } catch(error) {
+                            console.log("Unexpected error. Please try again later");
+                          }
+                          
+                          renderOrderSummary();
+                          renderPaymentSummary();
+                        
+                        }
+                        loadPage();
+
+                    Somne more details on try catch:
+                        We dont have to use it with async await, we can use it with synchronous code or normal code as well.
+
+                        Ex: 
+                          try{
+                            doesNotExist();
+                            console.log('next line');
+                          } catch(error) {
+                            console.log('Error');
+                          }
+
+                          Whenever we get an error, it will skip the rest of the code.
+
+                          Why dont we use try/catch everywhere?
+                            Its meant to handle unexpected errors(code is correct but outside our control is causing errors. So we can use instructions what to do)
+
+                          We can manually create errors:
+                            To manually create erros, we can use throw. throw creates an errors that we can catch later. We need to give that error a value, we can give nay type oof value, like string numvber or object. If it thrwos an error, it directly goes to catch
+
+                            async function loadPage(){
+                              //console.log('load page');
+                            
+                              try{
+                              
+                              throw 'error1';
+
+                              await loadProductsFetch();
+                            
+                              await new Promise((resolve) => {
+                                loadCart(() => {
+                                  resolve();
+                                });
+                              });
+                            
+                              } catch(error) {
+                                console.log("Unexpected error. Please try again later");
+                              }
+                              
+                              renderOrderSummary();
+                              renderPaymentSummary();
+                            
+                            }
+                            loadPage();
+
+                            HERE, THE ERROR VALUE, WHICH IS ERROR1 IN THIS CASE, STORES IN CATCH PARAMETER
+
+                        If we are using promises, there are 2 ways to manually create an error:
+                            1. throw
+                          throw doesnt work in the future 
+                            2. reject: its a function and lets us create an eroor in the future
+                            
+                            async function loadPage(){
+                              //console.log('load page');
+                            
+                              try{
+                            
+                                //throw 'error1';
+                            
+                              await loadProductsFetch();
+                            
+                              const value = await new Promise((resolve, reject) => {
+                                //throw 'error2';
+                                loadCart(() => {
+                                  reject('error3');
+                                  resolve('value3');
+                                });
+                              });
+                            
+                              } catch(error) {
+                                console.log("Unexpected error. Please try again later");
+                              }
+                              
+                              renderOrderSummary();
+                              renderPaymentSummary();
+                            
+                            }
+                            loadPage();
+
+                            reject creats an error in the future.
+
+                            In promise -> asynchronous and/or in the future use  reject
+                              Synchronpoous or right away use throw
+                            
 
 
 

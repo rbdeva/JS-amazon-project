@@ -8,14 +8,25 @@ import {loadCart} from '../data/cart.js'
 //Below, we load the products and we wait for products to finish and then we load the cart and we also wait to finish and then run rest of our code.
 async function loadPage(){
   //console.log('load page');
+
+  try{
+
+    //throw 'error1';
+
   await loadProductsFetch();
 
-  await new Promise((resolve) => {
+  const value = await new Promise((resolve, reject) => {
+    //throw 'error2';
     loadCart(() => {
-      resolve();
+      //reject('error3');
+      resolve('value3');
     });
   });
 
+  } catch(error) {
+    console.log("Unexpected error. Please try again later");
+  }
+  
   renderOrderSummary();
   renderPaymentSummary();
 

@@ -1222,6 +1222,210 @@ In tests.html:
                                                     
                                                   }
                                                   loadProductsFetch();
+
+
+*/
+
+/*
+        Async Await :
+                Even better way to handle asynchronous code.
+
+                Currenctky we are using promises to handle asynchronous code
+
+                But problem with promises:
+                   Creates a lot of extra code (we need to create a promise, and then resolve and ".then")
+                   
+                   Async await is a shortcut for promises and removes extra code.
+                   
+                   async = makes a function return a promise
+                          Ex: async function loadPage(){
+                            console.log('load page');
+                          }
+
+                  This code is similar to this code:
+                          
+                  function loadPage(){
+                    return new Promise((resolve) => {
+                      console.log('load page');
+                        resolve();
+                   });
+                  }
+
+                  As the 1st code returns a promise, we have to write .then
+
+                  async function loadPage(){
+                    console.log('load page');
+
+                  }
+                  loadPage().then(() => {
+                    console.log("next step");
+                  });
+
+                  If we return a any value to the async funcion then it will similar to resolve('value2');
+
+                  code-1:
+
+                  async function loadPage(){
+                    console.log('load page');
+                    return 'value2';
+                  }
+                  loadPage().then(() => {
+                    console.log("next step");
+                  });
+
+                  code-2:
+                         
+                  function loadPage(){
+                    return new Promise((resolve) => {
+                      console.log('load page');
+                        resolve();
+                   });
+                  }
+
+                  In code 1: the return value saves a parameter in .then
+
+                  async function loadPage(){
+                    console.log('load page');
+                    return 'value2';
+                  }
+                  loadPage().then((value) => {
+                    console.log("next step");
+                    console.log(value); //value2
+                  });
+
+
+                  Whats the point of async feature?
+                    Async lets us use await
+                  Await:
+                    Lets us wait for a promise to finish, before going to the next line
+
+
+                    async function loadPage(){
+                      console.log('load page');
+                      loadProductsFetch().then(() => {
+                        
+                      });
+                      return 'value2';
+                        }
+                        loadPage().then((value) => {
+                          console.log("next step");
+                          console.log(value);
+                        });
+
+                      Here instead of using .then(), async gives us a feature called as await
+
+                      async function loadPage() {
+                        console.log('load page');
+                        await loadProductsFetch(); // wait for the promise to resolve
+                        return 'value2'; // return value after loadProductsFetch finishes
+                      }
+                      
+                      loadPage().then((value) => {
+                        console.log("next step");
+                        console.log(value); // will log 'value2' after loadPage finishes
+                      });
+
+                      await lets us write asynchronous code like normal code
+                      
+
+
+                      async function loadPage() {
+                        console.log('load page');
+                        await loadProductsFetch(); // wait for the promise to resolve
+                        return 'value2'; // return value after loadProductsFetch finishes
+                      }
+
+                      the above code is similar to below code: 
+
+
+                      IMP: To find loadProductsFetch() go to the end of this page
+
+                        function loadPage() {
+                          return new Promise((resolve) => {
+                            console.log('load page');
+                            resolve();
+                          }).then(() => {
+                            return loadProductsFetch();
+                          }).then(() => {
+                            return new Promise((resolve) => {
+                              resolve('value2');
+                            });
+                          });
+                        }
+
+                        We can only use await, when we are inside an async function.
+
+                        Async await can only be used with promises and it wont do anything with callback
+
+                        Code with async and await is cleaner
+
+                        More details on async await:
+                          We can only use await insie async function.
+                          The closest function has to be async.
+
+                          Ex: 
+                          async function outerFnction() {
+                            console.lof('hello');
+                          }
+                          function innerFunction() {
+                            await loadProductsFetch();
+                          }
+                          }
+                          here, we have to make innerFunction() async inorder to use await
+
+
+                          When we give resolve() a value, then that value will be stored in the next step
+
+                          async function loadPage(){
+                            //console.log('load page');
+                            await loadProductsFetch();
+                          
+                            await new Promise((resolve) => {
+                              loadCart(() => {
+                                resolve('value3');
+                              });
+                            }).then((value) => {
+
+                            })
+                          
+                            renderOrderSummary();
+                            renderPaymentSummary();
+                          
+                          }
+                          loadPage();
+
+                          However,  if we use await this value just get return and we can save it in a variable, instead of using .then we can define a variable and store it.
+
+                          async function loadPage(){
+                            //console.log('load page');
+                            await loadProductsFetch();
+                          
+                            const value = await new Promise((resolve) => {
+                              loadCart(() => {
+                                resolve('value3');
+                              });
+                            })
+                          
+                            renderOrderSummary();
+                            renderPaymentSummary();
+                          
+                          }
+                          loadPage();
+
+
+                          We can also use await with Promise.all([]).
+
+
+                          Async await:
+                            Shortcut for promises
+                            Lets us write asynchronous code like normal code
+
+
+                            So when using asynchronous code, best practice is to use async await, over promises and callbacks, because they are much cleaner
+                          
+
+
+                                                  
                                       
 
 
@@ -1234,6 +1438,66 @@ In tests.html:
 
 
                               */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              export function loadProductsFetch(){
+                                const promise = fetch(
+                                  'https://supersimplebackend.dev/products'
+                                ).then((response) => {
+                                 return response.json();
+                                }).then((productsData) => {
+                                  products = productsData.map((productDetails) => {
+                                    if(productDetails.type === 'clothing'){
+                                      return new Clothing(productDetails); //Now our array has mix of clothing and products
+                                    }
+                                  
+                                    return new Product(productDetails);
+                                  
+                                  });
+                                  console.log('load products')
+                                });
+                                return promise;
+                              }
 
 
 

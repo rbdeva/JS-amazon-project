@@ -1163,7 +1163,65 @@ In tests.html:
                                       We gave an array of promises and run them at the same time and then goes to the next step.
 
 
-                                  Promises are better way for asynchronous code to finish than callbacks because they hep us avoid nesting and keep us our code flat and it has feature called promise.all, which we can run multiple promises at a same point of time.
+                                  Promises are better way for asy
+                                  
+                                  fetch('https://supersimplebackend.dev/products').then()nchronous code to finish than callbacks because they hep us avoid nesting and keep us our code flat and it has feature called promise.all, which we can run multiple promises at a same point of time.
+
+
+                                  fetch():
+                                          Fetch is a better way to make HTTP requests.
+                                          We used XMLHttpRequest to make a http request so far and this uses a callback.
+                                          But fetch() uses a promise.
+
+                                          To use fetch, we should use a buitin function called fetch().
+
+                                          By default, fetch make a GET request, so we just need to give url
+
+                                          fetch('https://supersimplebackend.dev/products') after usig thisstep, fetch automatically creates a promise so we just need to use .then()
+
+                                          fetch('https://supersimplebackend.dev/products').then(),
+
+                                          How it works:
+                                            Fetch sends a request to the backend, when we get a response, its goes t the next step and it also saves the response inside a parameter here:
+                                            fetch('https://supersimplebackend.dev/products').then((response)).
+
+
+                                            function loadProductsFetch(){
+                                              fetch('https://supersimplebackend.dev/products').then((response) => {
+                                                console.log(response);
+                                              });
+                                            }
+                                            loadProductsFetch();
+
+                                            Output:  Response {type: 'cors', url: 'https://supersimplebackend.dev/products', redirected: false, status: 200, ok: true, …}
+
+                                            Here we got some information like url status etc., but to get the data of products in this response?
+                                              Using: response.json();
+                                               Here response.json() is asynchronous, it returns a promise, so we need t wait for this promise to finish before continuoing to next steps. To do theta inside .then() we can write another promise
+
+
+                                               function loadProductsFetch(){
+                                                fetch('https://supersimplebackend.dev/products').then((response) => {
+                                                 return response.json();
+                                                }).then((productsData) => {
+                                              
+                                                });
+
+
+                                                here after loading the response.json(), it data saves in a paramater called productsData.
+
+
+                                                
+                                                  function loadProductsFetch(){
+                                                    fetch('https://supersimplebackend.dev/products').then((response) => {
+                                                    return response.json();
+                                                    }).then((productsData) => {
+                                                      console.log(productsData); //Gives products data
+
+                                                    });
+                                                    
+                                                  }
+                                                  loadProductsFetch();
                                       
 
 

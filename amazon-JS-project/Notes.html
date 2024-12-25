@@ -1003,6 +1003,174 @@ In tests.html:
                                     import {loadProducts} from '../../data/proucts.js';
 
 
+                              Promises:
+                                    Better way to handle asynchronous code
+                                    Similar to done() function
+                                    Let us wait for some cde to finish before going to the next step
+
+                                    Promise is a class 
+                                      To create new Promise object we should type: new Promise(); inside this brackets we need to give a function.
+                                      and new Promise(() => {
+
+                                      });
+                                      Thats how promises are made and promise is a built in class
+
+                                      When we create the above promise, its going to run this function immediately
+
+
+                                      new Promise(() => {
+                                        console.log('promise');
+                                      });
+
+                                      When we creates a romise, it runs this inner function immediately. This inner function gets  a parameter called "resolve". Resolve is a function and similar to Jasmine's done() function.
+                                      Resolve, lets us control when to go to the next step.
+
+                                      new Promise(() => {
+                                        loadProducts(() => {
+                                          resolve();
+                                        });
+                                      });
+
+                                      
+                                      we run a asynchronous code and we wait for to finish and we call resolve t go next step. 
+
+                                      Similar to jasmine's done() function:
+                                            beforeAll((done) => {
+                                              loadProducts( () => {
+                                                done();
+                                              });
+                                            });
+
+
+
+                                    Promise create a separtae line of code or separate thread //Like alternate timeline 20:34:47
+
+
+
+                                    new Promise((resolve) => {
+                                      loadProducts(() => {
+                                        resolve();
+                                      });
+                                    }).then(() => {
+                                      renderOrderSummary();
+                                      renderPaymentSummary();
+                                    });
+
+
+                                    Here, first we call loadProducts() and after it got loaded we call resolve and then goes to the next step
+
+
+
+                        Why do we need promises?
+                                    Callbacks has a problem: Multile callbacks cause a lot of nesting.
+                                      Nesting: code inside code
+
+
+
+                                    Below both codes are same
+
+                                    Example Callback code: 
+
+
+                                    loadProducts(() => {
+                                      loadCart(() => {
+                                        renderOrderSummary();
+                                        renderPaymentSummary();
+                                      });
+                                    }); //code 10
+
+
+
+                                      Example Promise code: 
+
+                                      new Promise((resolve) => {
+                                        loadProducts(() => {
+                                          resolve();
+                                        });
+                                      }).then(() => {
+                                        return new Promise((resolve) => {
+                                          loadCart(() => {
+                                            resolve();
+                                          });
+                                        });
+                                      }).then(() => {
+                                        renderOrderSummary();
+                                        renderPaymentSummary();
+                                        }); 
+
+
+                                        Both codes are same
+
+                                        First step, we wait for loadProducts to finish and then call resolve then goes to the second step, wait to finish the loadCart and then we call resolve ad then goes to the third Step. 
+
+                                        Promises keep our code flat and avoid too much nesting so recommened to use promises instead of callbacks
+
+
+                                  2 more features of promises:
+                                        1. We can give resolve a value.
+
+                                        Whatever we give to resolve, it gonna be saves in a parameter inside .then
+
+                                        new Promise((resolve) => {
+                                          loadProducts(() => {
+                                            resolve('value1');
+                                          });
+                                        
+                                        }).then((value) => {
+                                          console.log(value); //value1  Here it will give value1 because we saved value1 in resolve
+                                          return new Promise((resolve) => {
+                                            loadCart(() => {
+                                              resolve();
+                                            });
+                                          });
+                                        
+                                        }).then(() => {
+                                          renderOrderSummary();
+                                          renderPaymentSummary();
+                                          }); 
+
+
+                                        2. We can run multiple promises at a time.
+                                          In our code, we wait for loadProducts to load to go the next step and so on.
+
+                                          But we can load both loadProducts() and loadCart() at the same time. To do that we can use a feature  called promise.all()
+                                          
+                                          Promise.all()
+                                            - Lets us run multiple promises at the same time
+                                            - And wait for all of them to finish
+
+
+
+                                          Promise.all([
+                                            new Promise((resolve) => {
+                                              loadProducts(() => {
+                                                resolve('value1');
+                                              });
+                                            }), 
+                                          
+                                            new Promise((resolve) => {
+                                              loadCart(() => {
+                                                resolve();
+                                              });
+                                            })
+                                          
+                                          ]).then((values) => {
+                                            console.log(values); //['value1', undefined]
+                                            renderOrderSummary();
+                                            renderPaymentSummary();
+                                          });
+
+                                      We gave an array of promises and run them at the same time and then goes to the next step.
+
+
+                                  Promises are better way for asynchronous code to finish than callbacks because they hep us avoid nesting and keep us our code flat and it has feature called promise.all, which we can run multiple promises at a same point of time.
+                                      
+
+
+
+
+
+
 
 
 
